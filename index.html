@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wohnidylle Zielacker</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Karla:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:wght@400;500;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --uebergang: .5s cubic-bezier(.25,1,.5,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--schrift-text);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--hintergrund);
+  -webkit-font-smoothing: antialiased;
+  padding-top: 84px;
+  transition: background-color var(--uebergang), color var(--uebergang);
+}
+
+h1, h2, h3 { font-family: var(--schrift-titel); font-weight: 400; line-height: 1.15; }
+
+.huelle { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+/* --- Kopfzeile, fixiert --- */
+.kopf {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  backdrop-filter: blur(16px);
+  background: color-mix(in srgb, var(--hintergrund) 85%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+  transition: background-color var(--uebergang);
+}
+.kopf-inhalt {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; padding: 1.1rem 0; flex-wrap: wrap;
+}
+.kopf-titel { font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; opacity: .65; }
+.umschalter { display: flex; gap: .5rem; flex-wrap: wrap; }
+.umschalter button {
+  display: inline-flex; align-items: center;
+  font: inherit; font-size: .82rem; cursor: pointer;
+  padding: .55rem 1.1rem; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: var(--flaeche); color: var(--text);
+  transition: background-color .25s, color .25s, border-color .25s, transform .2s;
+}
+.umschalter button:hover { border-color: var(--primaer); transform: translateY(-1px); }
+.umschalter button[aria-pressed="true"] { background: var(--primaer); border-color: var(--primaer); color: var(--flaeche); }
+.umschalter button:focus-visible { outline: 2px solid var(--akzent); outline-offset: 2px; }
+.punkt { display: inline-block; width: .5em; height: .5em; border-radius: 50%; margin-right: .55em; flex: none; }
+
+/* --- Abschnitte --- */
+section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.vorzeile { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--akzent); margin-bottom: .9rem; font-weight: 500; }
+.section-titel { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: .5rem; }
+.section-text { font-size: .92rem; opacity: .75; max-width: 56ch; margin-bottom: 2rem; }
+
+/* --- Hero-Karte --- */
+.hero-karte {
+  background: var(--flaeche); border-radius: var(--radius);
+  box-shadow: 0 12px 32px -14px color-mix(in srgb, var(--text) 30%, transparent);
+  padding: clamp(2rem, 5vw, 3.5rem); margin-top: 2rem;
+  transition: border-radius var(--uebergang);
+}
+.hero-karte h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: .5rem 0 1rem; color: var(--primaer); letter-spacing: -.01em; }
+.hero-tagline { font-size: clamp(1.1rem, 1.7vw, 1.3rem); line-height: 1.55; opacity: .88; margin-bottom: 1.5rem; max-width: 58ch; }
+.hero-notiz {
+  font-style: italic; opacity: .8; font-size: .95rem; max-width: 58ch;
+  border-left: 3px solid var(--akzent); padding-left: 1rem; margin-bottom: 1.75rem;
+}
+.markenband { display: flex; gap: .35rem; height: 10px; border-radius: 999px; overflow: hidden; margin-bottom: 1.75rem; max-width: 420px; }
+.markenband span { flex: 1; }
+.marken { display: flex; flex-wrap: wrap; gap: .55rem; }
+.marke {
+  font-size: .76rem; letter-spacing: .04em; padding: .4rem .9rem;
+  border-radius: 999px; background: color-mix(in srgb, var(--sekundaer) 55%, var(--flaeche));
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+/* --- Farbpalette --- */
+.palette { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.1rem; }
+.farbe {
+  display: block; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  border: none; background: var(--flaeche); border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 6px 20px -10px color-mix(in srgb, var(--text) 25%, transparent);
+  transition: transform .2s ease, box-shadow .2s ease, border-radius var(--uebergang);
+}
+.farbe:hover { transform: translateY(-4px); }
+.farbe:focus-visible { outline: 2px solid var(--akzent); outline-offset: 2px; }
+.farbe-flaeche { display: block; width: 100%; height: 108px; transition: background-color var(--uebergang); }
+.farbe-text { display: block; padding: 1rem 1.1rem 1.2rem; }
+.farbe-rolle { display: block; font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--akzent); font-weight: 600; }
+.farbe-name { display: block; font-weight: 600; margin: .35rem 0 .1rem; }
+.farbe-hex { display: block; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .78rem; opacity: .65; }
+.farbe-beschrieb { display: block; font-size: .78rem; opacity: .7; margin-top: .5rem; }
+
+/* --- Typografie: invertierte Karte --- */
+.typo-karte {
+  background: var(--primaer); color: var(--hintergrund);
+  border-radius: var(--radius); padding: clamp(1.75rem, 4vw, 3rem);
+  transition: background-color var(--uebergang), border-radius var(--uebergang);
+}
+.typo-karte .vorzeile { color: var(--hintergrund); opacity: .8; }
+.typo-karte .section-titel { color: var(--hintergrund); }
+.typo-karte .section-text { color: var(--hintergrund); opacity: .8; }
+.typo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+.typo-rolle { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; opacity: .7; margin-bottom: .5rem; }
+.typo-name { font-weight: 600; margin-bottom: 1.1rem; }
+.probe-gross { font-family: var(--schrift-titel); font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.15; }
+.probe-text { font-family: var(--schrift-text); font-size: 1rem; opacity: .92; }
+
+/* --- Anwendung: UI-Karte + Knopfstapel --- */
+.anwendung-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 1.75rem; align-items: start; }
+.ui-karte {
+  background: var(--flaeche); border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 12px 32px -16px color-mix(in srgb, var(--text) 30%, transparent);
+  transition: border-radius var(--uebergang);
+}
+.ui-karte-kopf { background: var(--primaer); color: var(--hintergrund); padding: 1.5rem 1.75rem; }
+.ui-karte-vorzeile { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+.ui-karte-titel { font-family: var(--schrift-titel); font-size: 1.4rem; margin-top: .3rem; }
+.ui-karte-inhalt { padding: 1.5rem 1.75rem 1.75rem; }
+.ui-karte-text { font-size: .95rem; opacity: .85; margin-bottom: 1.25rem; }
+.ui-karte-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; padding-top: 1.1rem; border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
+.ui-karte-fakt { font-weight: 600; }
+.ui-karte-status { font-size: .74rem; font-weight: 600; padding: .4rem .85rem; border-radius: 999px; background: color-mix(in srgb, var(--sekundaer) 55%, var(--flaeche)); }
+
+.knopfstapel { display: flex; flex-direction: column; gap: 1rem; }
+.knopf { font: inherit; font-size: .92rem; padding: .85rem 1.6rem; border-radius: var(--radius); cursor: pointer; border: 2px solid transparent; transition: opacity .2s, background-color .2s, color .2s, border-radius var(--uebergang); }
+.knopf:hover { opacity: .87; }
+.knopf-primaer { background: var(--primaer); color: var(--flaeche); }
+.knopf-sekundaer { background: transparent; color: var(--primaer); border-color: var(--primaer); }
+.knopf-sekundaer:hover { background: var(--primaer); color: var(--flaeche); }
+.knopf-akzent { background: var(--akzent); color: var(--flaeche); }
+
+/* --- Fusszeile --- */
+.fuss { text-align: center; padding: 2.5rem 0 3.5rem; font-size: .82rem; opacity: .6; }
+
+/* --- Hinweis beim Kopieren --- */
+.hinweis {
+  position: fixed; left: 50%; bottom: 2rem; transform: translate(-50%, 1.5rem);
+  background: var(--text); color: var(--hintergrund);
+  padding: .7rem 1.4rem; border-radius: 999px; font-size: .85rem;
+  opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 80;
+}
+.hinweis.sichtbar { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 780px) {
+  .anwendung-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="kopf">
+  <div class="huelle kopf-inhalt">
+    <div class="kopf-titel">Wohnidylle Zielacker, Madiswil</div>
+    <nav class="umschalter" aria-label="Markenkonzept waehlen">
+      <button type="button" data-waehle="1" aria-pressed="true"><span class="punkt" style="background:#4a4238"></span>Konzept 1</button>
+      <button type="button" data-waehle="2" aria-pressed="false"><span class="punkt" style="background:#5c6355"></span>Konzept 2</button>
+      <button type="button" data-waehle="3" aria-pressed="false"><span class="punkt" style="background:#7d5d3f"></span>Konzept 3</button>
+    </nav>
+  </div>
+</header>
+
+<main class="huelle">
+
+  <section class="block">
+    <div class="hero-karte">
+      <div class="vorzeile" id="konzept-label">Konzept 1</div>
+      <h1>Wohnidylle Zielacker</h1>
+      <p class="hero-tagline">Zwei ruhige Häuser in Madiswil, ein Zuhause für Familien, Senioren und alle, die ihre Ruhe schätzen.</p>
+      <p class="hero-notiz">Zwölf Wohnungen in zwei Häusern mit Lift, gedecktem Sitzplatz oder Balkon bei jeder Wohnung und einem gemeinsamen Spielplatz. Die Farben stammen aus der Fassade und dem Dach des Projekts.</p>
+      <div class="markenband" id="markenband">
+        <span style="background:#4a4238"></span>
+        <span style="background:#dbddc5"></span>
+        <span style="background:#7a5228"></span>
+        <span style="background:#f2f0e6"></span>
+        <span style="background:#2e2a24"></span>
+      </div>
+      <div class="marken">
+        <span class="marke">Fassadenputz</span>
+        <span class="marke">Tonziegel Anthrazit</span>
+        <span class="marke">Lift &amp; Balkon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="vorzeile">Farbpalette</div>
+    <h2 class="section-titel">Fünf Farben</h2>
+    <p class="section-text">Anklicken kopiert den Farbwert.</p>
+    <div class="palette" id="palette-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="typo-karte">
+      <div class="vorzeile">Typografie</div>
+      <h2 class="section-titel">Zwei Schriften</h2>
+      <p class="section-text">Eine für Überschriften, eine für den Fliesstext.</p>
+      <div class="typo-grid">
+        <div>
+          <div class="typo-rolle">Überschriften</div>
+          <div class="typo-name" id="schrift-titel-name">Lora</div>
+          <div class="probe-gross">Wohnidylle Zielacker</div>
+        </div>
+        <div>
+          <div class="typo-rolle">Fliesstext</div>
+          <div class="typo-name" id="schrift-text-name">Karla</div>
+          <p class="probe-text">Zwei Häuser, ein gemeinsamer Spielplatz, Lift und Balkon bei jeder Wohnung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="vorzeile">Anwendung</div>
+    <h2 class="section-titel">So wirken Farbe und Schrift zusammen</h2>
+    <p class="section-text">Ausschnitt, wie Primär-, Sekundär- und Akzentfarbe auf der späteren Webseite eingesetzt werden.</p>
+    <div class="anwendung-grid">
+      <div class="ui-karte">
+        <div class="ui-karte-kopf">
+          <div class="ui-karte-vorzeile">Wohnidylle Zielacker</div>
+          <div class="ui-karte-titel">Musterwohnung</div>
+        </div>
+        <div class="ui-karte-inhalt">
+          <p class="ui-karte-text">Zwölf Wohnungen in zwei ruhigen Mehrfamilienhäusern mit Lift, Balkon und gemeinsamem Spielplatz.</p>
+          <div class="ui-karte-meta">
+            <span class="ui-karte-fakt">3.5&ndash;5.5 Zimmer</span>
+            <span class="ui-karte-status">Baubeginn 2027</span>
+          </div>
+        </div>
+      </div>
+      <div class="knopfstapel">
+        <button class="knopf knopf-primaer" type="button">Wohnungen ansehen</button>
+        <button class="knopf knopf-sekundaer" type="button">Unterlagen laden</button>
+        <button class="knopf knopf-akzent" type="button">Kontakt aufnehmen</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fuss">Wohnidylle Zielacker, Madiswil, Markenkonzepte für Eigenheim Bau AG</footer>
+
+<div class="hinweis" id="hinweis" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var KONZEPTE = {
+    1: {
+      primaer: "#4a4238", sekundaer: "#dbddc5", akzent: "#7a5228",
+      hintergrund: "#f2f0e6", text: "#2e2a24", flaeche: "#ffffff", radius: "4px",
+      schriftTitel: "\"Lora\", Georgia, serif", schriftText: "\"Karla\", system-ui, sans-serif",
+      schriftTitelName: "Lora", schriftTextName: "Karla",
+      swatches: [
+        { rolle: "Primaer", name: "Anthrazitbraun", hex: "#4a4238", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
+        { rolle: "Sekundaer", name: "Fassadengrün", hex: "#dbddc5", beschrieb: "Direkt von der Fassade des Gebäudes." },
+        { rolle: "Akzent", name: "Alteiche", hex: "#7a5228", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
+        { rolle: "Hintergrund", name: "Leinen", hex: "#f2f0e6", beschrieb: "Helle, warme Grundfläche der Seite." },
+        { rolle: "Text", name: "Tiefbraun", hex: "#2e2a24", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
+      ]
+    },
+    2: {
+      primaer: "#5c6355", sekundaer: "#e8e9d9", akzent: "#3a3a3a",
+      hintergrund: "#f7f7f2", text: "#26261f", flaeche: "#ffffff", radius: "2px",
+      schriftTitel: "\"Outfit\", system-ui, sans-serif", schriftText: "\"Inter\", system-ui, sans-serif",
+      schriftTitelName: "Outfit", schriftTextName: "Inter",
+      swatches: [
+        { rolle: "Primaer", name: "Salbeigrün", hex: "#5c6355", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
+        { rolle: "Sekundaer", name: "Fassadenhell", hex: "#e8e9d9", beschrieb: "Direkt von der Fassade des Gebäudes." },
+        { rolle: "Akzent", name: "Anthrazit", hex: "#3a3a3a", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
+        { rolle: "Hintergrund", name: "Nebelweiss", hex: "#f7f7f2", beschrieb: "Helle, warme Grundfläche der Seite." },
+        { rolle: "Text", name: "Kohle", hex: "#26261f", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
+      ]
+    },
+    3: {
+      primaer: "#7d5d3f", sekundaer: "#dbddc5", akzent: "#5c6a4f",
+      hintergrund: "#f5f0e6", text: "#332b22", flaeche: "#ffffff", radius: "14px",
+      schriftTitel: "\"Fraunces\", Georgia, serif", schriftText: "\"Nunito Sans\", system-ui, sans-serif",
+      schriftTitelName: "Fraunces", schriftTextName: "Nunito Sans",
+      swatches: [
+        { rolle: "Primaer", name: "Warmes Holz", hex: "#7d5d3f", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
+        { rolle: "Sekundaer", name: "Fassadengrün", hex: "#dbddc5", beschrieb: "Direkt von der Fassade des Gebäudes." },
+        { rolle: "Akzent", name: "Moosgrün", hex: "#5c6a4f", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
+        { rolle: "Hintergrund", name: "Warmweiss", hex: "#f5f0e6", beschrieb: "Helle, warme Grundfläche der Seite." },
+        { rolle: "Text", name: "Dunkelbraun", hex: "#332b22", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
+      ]
+    }
+  };
+
+  var root = document.documentElement;
+  var knoepfe = document.querySelectorAll("[data-waehle]");
+  var hinweis = document.getElementById("hinweis");
+  var zeitgeber;
+
+  function setzeVar(name, wert) { root.style.setProperty(name, wert); }
+
+  function waehle(nummer) {
+    var k = KONZEPTE[nummer];
+    if (!k) return;
+
+    setzeVar("--primaer", k.primaer);
+    setzeVar("--sekundaer", k.sekundaer);
+    setzeVar("--akzent", k.akzent);
+    setzeVar("--hintergrund", k.hintergrund);
+    setzeVar("--text", k.text);
+    setzeVar("--flaeche", k.flaeche);
+    setzeVar("--radius", k.radius);
+    setzeVar("--schrift-titel", k.schriftTitel);
+    setzeVar("--schrift-text", k.schriftText);
+
+    document.getElementById("konzept-label").textContent = "Konzept " + nummer;
+    document.getElementById("schrift-titel-name").textContent = k.schriftTitelName;
+    document.getElementById("schrift-text-name").textContent = k.schriftTextName;
+
+    var band = document.getElementById("markenband");
+    band.innerHTML = [k.primaer, k.sekundaer, k.akzent, k.hintergrund, k.text]
+      .map(function (hex) { return '<span style="background:' + hex + '"></span>'; })
+      .join("");
+
+    document.getElementById("palette-grid").innerHTML = k.swatches.map(function (s) {
+      return '<button class="farbe" type="button" data-hex="' + s.hex + '">' +
+        '<span class="farbe-flaeche" style="background:' + s.hex + '"></span>' +
+        '<span class="farbe-text">' +
+          '<span class="farbe-rolle">' + s.rolle + '</span>' +
+          '<span class="farbe-name">' + s.name + '</span>' +
+          '<span class="farbe-hex">' + s.hex + '</span>' +
+          '<span class="farbe-beschrieb">' + s.beschrieb + '</span>' +
+        '</span></button>';
+    }).join("");
+
+    knoepfe.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.waehle === String(nummer))); });
+  }
+
+  function melden(text) {
+    hinweis.textContent = text;
+    hinweis.classList.add("sichtbar");
+    clearTimeout(zeitgeber);
+    zeitgeber = setTimeout(function () { hinweis.classList.remove("sichtbar"); }, 1800);
+  }
+
+  knoepfe.forEach(function (k) {
+    k.addEventListener("click", function () { waehle(k.dataset.waehle); });
+  });
+
+  document.addEventListener("click", function (e) {
+    var farbe = e.target.closest(".farbe");
+    if (!farbe) return;
+    var wert = farbe.dataset.hex;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(wert).then(function () { melden(wert + " kopiert"); });
+    } else {
+      melden(wert);
+    }
+  });
+
+  waehle(1);
+})();
+</script>
+
+</body>
+</html>
