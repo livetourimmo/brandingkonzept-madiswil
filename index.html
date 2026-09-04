@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Karla:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:wght@400;500;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -170,11 +170,7 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
 <header class="kopf">
   <div class="huelle kopf-inhalt">
     <div class="kopf-titel">Wohnidylle Zielacker, Madiswil</div>
-    <nav class="umschalter" aria-label="Markenkonzept wählen">
-      <button type="button" data-waehle="1" aria-pressed="true"><span class="punkt" style="background:#4a4238"></span>Konzept 1</button>
-      <button type="button" data-waehle="2" aria-pressed="false"><span class="punkt" style="background:#5c6355"></span>Konzept 2</button>
-      <button type="button" data-waehle="3" aria-pressed="false"><span class="punkt" style="background:#7d5d3f"></span>Konzept 3</button>
-    </nav>
+    <div class="kopf-titel"><span class="punkt" style="background:#5c6355"></span>Finales Konzept</div>
   </div>
 </header>
 
@@ -182,7 +178,7 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
 
   <section class="block">
     <div class="hero-karte">
-      <div class="vorzeile" id="konzept-label">Konzept 1</div>
+      <div class="vorzeile" id="konzept-label">Finales Konzept</div>
       <h1>Wohnidylle Zielacker</h1>
       <p class="hero-tagline">Zwei ruhige Häuser in Madiswil, ein Zuhause für Familien, Senioren und alle, die ihre Ruhe schätzen.</p>
       <p class="hero-notiz">Zwölf Wohnungen in zwei Häusern mit Lift, gedecktem Sitzplatz oder Balkon bei jeder Wohnung und einem gemeinsamen Spielplatz. Die Farben stammen aus der Fassade und dem Dach des Projekts.</p>
@@ -262,58 +258,28 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
 
 <script>
 (function () {
-  var KONZEPTE = {
-    1: {
-      primaer: "#4a4238", sekundaer: "#dbddc5", akzent: "#7a5228",
-      hintergrund: "#f2f0e6", text: "#2e2a24", flaeche: "#ffffff", radius: "4px",
-      schriftTitel: "\"Lora\", Georgia, serif", schriftText: "\"Karla\", system-ui, sans-serif",
-      schriftTitelName: "Lora", schriftTextName: "Karla",
-      swatches: [
-        { rolle: "Primär", name: "Anthrazitbraun", hex: "#4a4238", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
-        { rolle: "Sekundär", name: "Fassadengrün", hex: "#dbddc5", beschrieb: "Direkt von der Fassade des Gebäudes." },
-        { rolle: "Akzent", name: "Alteiche", hex: "#7a5228", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
-        { rolle: "Hintergrund", name: "Leinen", hex: "#f2f0e6", beschrieb: "Helle, warme Grundfläche der Seite." },
-        { rolle: "Text", name: "Tiefbraun", hex: "#2e2a24", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
-      ]
-    },
-    2: {
-      primaer: "#5c6355", sekundaer: "#e8e9d9", akzent: "#3a3a3a",
-      hintergrund: "#f7f7f2", text: "#26261f", flaeche: "#ffffff", radius: "2px",
-      schriftTitel: "\"Outfit\", system-ui, sans-serif", schriftText: "\"Inter\", system-ui, sans-serif",
-      schriftTitelName: "Outfit", schriftTextName: "Inter",
-      swatches: [
-        { rolle: "Primär", name: "Salbeigrün", hex: "#5c6355", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
-        { rolle: "Sekundär", name: "Fassadenhell", hex: "#e8e9d9", beschrieb: "Direkt von der Fassade des Gebäudes." },
-        { rolle: "Akzent", name: "Anthrazit", hex: "#3a3a3a", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
-        { rolle: "Hintergrund", name: "Nebelweiss", hex: "#f7f7f2", beschrieb: "Helle, warme Grundfläche der Seite." },
-        { rolle: "Text", name: "Kohle", hex: "#26261f", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
-      ]
-    },
-    3: {
-      primaer: "#7d5d3f", sekundaer: "#dbddc5", akzent: "#5c6a4f",
-      hintergrund: "#f5f0e6", text: "#332b22", flaeche: "#ffffff", radius: "14px",
-      schriftTitel: "\"Fraunces\", Georgia, serif", schriftText: "\"Nunito Sans\", system-ui, sans-serif",
-      schriftTitelName: "Fraunces", schriftTextName: "Nunito Sans",
-      swatches: [
-        { rolle: "Primär", name: "Warmes Holz", hex: "#7d5d3f", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
-        { rolle: "Sekundär", name: "Fassadengrün", hex: "#dbddc5", beschrieb: "Direkt von der Fassade des Gebäudes." },
-        { rolle: "Akzent", name: "Moosgrün", hex: "#5c6a4f", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
-        { rolle: "Hintergrund", name: "Warmweiss", hex: "#f5f0e6", beschrieb: "Helle, warme Grundfläche der Seite." },
-        { rolle: "Text", name: "Dunkelbraun", hex: "#332b22", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
-      ]
-    }
+  var KONZEPT = {
+    primaer: "#5c6355", sekundaer: "#e8e9d9", akzent: "#3a3a3a",
+    hintergrund: "#f7f7f2", text: "#26261f", flaeche: "#ffffff", radius: "2px",
+    schriftTitel: "\"Outfit\", system-ui, sans-serif", schriftText: "\"Inter\", system-ui, sans-serif",
+    schriftTitelName: "Outfit", schriftTextName: "Inter",
+    swatches: [
+      { rolle: "Primär", name: "Salbeigrün", hex: "#5c6355", beschrieb: "Ankerfarbe für Buttons und wichtige Flächen." },
+      { rolle: "Sekundär", name: "Fassadenhell", hex: "#e8e9d9", beschrieb: "Direkt von der Fassade des Gebäudes." },
+      { rolle: "Akzent", name: "Anthrazit", hex: "#3a3a3a", beschrieb: "Setzt gezielte Akzente bei Hervorhebungen." },
+      { rolle: "Hintergrund", name: "Nebelweiss", hex: "#f7f7f2", beschrieb: "Helle, warme Grundfläche der Seite." },
+      { rolle: "Text", name: "Kohle", hex: "#26261f", beschrieb: "Fliesstextfarbe, kein reines Schwarz." }
+    ]
   };
 
   var root = document.documentElement;
-  var knoepfe = document.querySelectorAll("[data-waehle]");
   var hinweis = document.getElementById("hinweis");
   var zeitgeber;
 
   function setzeVar(name, wert) { root.style.setProperty(name, wert); }
 
-  function waehle(nummer) {
-    var k = KONZEPTE[nummer];
-    if (!k) return;
+  function darstellen() {
+    var k = KONZEPT;
 
     setzeVar("--primaer", k.primaer);
     setzeVar("--sekundaer", k.sekundaer);
@@ -325,7 +291,6 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
     setzeVar("--schrift-titel", k.schriftTitel);
     setzeVar("--schrift-text", k.schriftText);
 
-    document.getElementById("konzept-label").textContent = "Konzept " + nummer;
     document.getElementById("schrift-titel-name").textContent = k.schriftTitelName;
     document.getElementById("schrift-text-name").textContent = k.schriftTextName;
 
@@ -344,8 +309,6 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
           '<span class="farbe-beschrieb">' + s.beschrieb + '</span>' +
         '</span></button>';
     }).join("");
-
-    knoepfe.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.waehle === String(nummer))); });
   }
 
   function melden(text) {
@@ -354,10 +317,6 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
     clearTimeout(zeitgeber);
     zeitgeber = setTimeout(function () { hinweis.classList.remove("sichtbar"); }, 1800);
   }
-
-  knoepfe.forEach(function (k) {
-    k.addEventListener("click", function () { waehle(k.dataset.waehle); });
-  });
 
   document.addEventListener("click", function (e) {
     var farbe = e.target.closest(".farbe");
@@ -370,7 +329,7 @@ section.block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
     }
   });
 
-  waehle(1);
+  darstellen();
 })();
 </script>
 
